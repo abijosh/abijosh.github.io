@@ -53,7 +53,7 @@
     //camera.up = new THREE.Vector3(0,0,1);
 
     // Look at the center of the scene
-    camera.lookAt(scene.position);
+   // camera.lookAt(scene.position);
 
     // Think of the renderer as the engine that drives the scene
     var renderer = new THREE.WebGLRenderer({antialias: true});
@@ -78,7 +78,7 @@
 
     
 			var shape=new THREE.SphereGeometry(35,50,50);
-			camera.position.set(0,0,-15);
+			camera.position.set(0,0,0);
 						
 			var texLoader=new THREE.TextureLoader();
 			var myEarth;
@@ -128,7 +128,7 @@
 			scene.add(directionalLight);
 			
 			
-			camera.position.z=20;
+			camera.position.z=0;
 			
 	
 	
