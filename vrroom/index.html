@@ -3,7 +3,7 @@
 <head>
 		<title>Room</title>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 		<style>
 			html, body {
 				background-color: #000;
@@ -14,6 +14,7 @@
 		</style>
 
 	</head>
+	
 <body>
 		<script src="three.js"></script>
 		<script src="OrbitControls.js"></script>
@@ -25,16 +26,17 @@
 
 		<script>
 
-		if ( WEBVR.isAvailable() === false ) {
+		WEBVR.checkAvailability().catch( function( message ) {
 
-			document.body.appendChild( WEBVR.getMessage() );
+				document.body.appendChild( WEBVR.getMessageContainer( message ) );
 
-		}
+			} );
 
 		//
 
 		var camera;
 		var effect, controls,vcontrols;
+		var container;
 		var renderer;
 		var scene;
 
@@ -44,11 +46,18 @@
 		function init() {
 		
 		
-			renderer = new THREE.WebGLRenderer();
+			container = document.createElement( 'div' );
+				document.body.appendChild( container );
+		
+
+			renderer = new THREE.WebGLRenderer( { antialias: true } );
+			renderer.setClearColor( 0x505050 );
 			renderer.setPixelRatio( window.devicePixelRatio );
 			renderer.setSize( window.innerWidth, window.innerHeight );
-			renderer.vr.enabled = true;
-			document.body.appendChild( renderer.domElement );
+			renderer.sortObjects = false;
+
+			container.appendChild( renderer.domElement );	
+					
 
 			scene = new THREE.Scene();
 			//renderer.setClearColor (0xff01234, 1);
@@ -63,13 +72,13 @@
 				controls.enableZoom = false;
 
 			
-			
+			/*
 			if ( WEBVR.isAvailable() === true ) {
 
 				document.body.appendChild( WEBVR.getButton( effect ) );
 
 			}
-
+*/
 
 			var shape=new THREE.SphereGeometry(35,50,50);
 			camera.position.set(0,0,-15);
@@ -124,26 +133,18 @@
 			
 			camera.position.z=20;
 			
-				vcontrols = new THREE.VRControls( camera );
-				effect = new THREE.VREffect( renderer );
-
-				if ( navigator.getVRDisplays ) {
-
-					navigator.getVRDisplays()
-						.then( function ( displays ) {
-							effect.setVRDisplay( displays[ 0 ] );
-							vcontrols.setVRDisplay( displays[ 0 ] );
-						} )
-						.catch( function () {
-							// no displays
-						} );
-
-					document.body.appendChild( WEBVR.getButton( effect ) );
 			
 			
-			window.addEventListener( 'resize', onWindowResize, false );
+				//vcontrols = new THREE.VRControls( camera );
+				//effect = new THREE.VREffect( renderer );
 
-		}
+				WEBVR.getVRDisplay( function ( display ) {
+
+					renderer.vr.setDevice( display );
+
+					document.body.appendChild( WEBVR.getButton( display, renderer.domElement ) );
+
+				} );
 		}
 
 		
@@ -157,17 +158,25 @@
 
 		}
 		
-		
-
 		function animate() {
 
-			vcontrols.update();
+				renderer.animate( render );
+
+			}
+		
+		
+
+		function render() {
+		
+			renderer.render( scene, camera );
+
+			//vcontrols.update();
 			
 			controls.update();
 			
-			effect.render( scene, camera );
+			//effect.render( scene, camera );
 
-			effect.requestAnimationFrame( animate );
+			//effect.requestAnimationFrame( animate );
 
 		}
 
