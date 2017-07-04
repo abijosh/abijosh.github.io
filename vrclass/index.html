@@ -102,7 +102,8 @@
 				msgMaterial=new THREE.MeshPhongMaterial({map:tex,overdraw:0.5});
 				myMsg=new THREE.Mesh(TextShape,msgMaterial);
 				myMsg.material.side=THREE.DoubleSide;
-				myMsg.position.set(0,0,10);
+				myMsg.position.set(0,30,0);
+				myMsg.rotation.x=90;
 				scene.add(myMsg);
 			}
 			
