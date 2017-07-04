@@ -99,7 +99,7 @@
 			{
 				console.log("Text Loaded");
 				
-				msgMaterial=new THREE.MeshPhongMaterial({map:tex,overdraw:0.5});
+				msgMaterial=new THREE.MeshBasicMaterial({map:tex,overdraw:0.5});
 				myMsg=new THREE.Mesh(TextShape,msgMaterial);
 				myMsg.material.side=THREE.DoubleSide;
 				myMsg.rotation.set(90,0,0);
@@ -171,14 +171,14 @@
 	    		ambientLight.intensity=0.8;
 			scene.add(ambientLight);
 			
-			/*
+			
 			var directionalLight=new THREE.PointLight();
 			directionalLight.intensity=0.8;
 			directionalLight.position.z=5;
 			//directionalLight.rotation.y=90;
 			directionalLight.position.set(0,0,0);
 			scene.add(directionalLight);
-			*/
+			
 			
 			camera.position.z=0;
 			
