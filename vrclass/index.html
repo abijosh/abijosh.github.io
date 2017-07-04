@@ -75,6 +75,55 @@
     effect.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     var manager = new WebVRManager(renderer, effect);
+	    
+	    
+	    var TextShape=new THREE.BoxGeometry(10,10,0.5);
+			
+						
+			var textLoader=new THREE.TextureLoader();
+			var myMsg;
+			var msgMaterial;
+			
+			/*
+			var shapeMaterial=new THREE.MeshPhongMaterial({color:0xeee000});
+			myEarth=new THREE.Mesh(shape,shapeMaterial);
+			myEarth.material.side=THREE.DoubleSide;
+				scene.add(myEarth);
+			*/
+			
+			
+			texLoader.crossOrigin="";
+			texLoader.load("text.png",handleTextLoad,handleonProg,handleonErr);
+			
+			function handleTextLoad(tex)
+			{
+				console.log("Text Loaded");
+				
+				msgMaterial=new THREE.MeshPhongMaterial({map:tex,overdraw:0.5});
+				myMsg=new THREE.Mesh(TextShape,msgMaterial);
+				myMsg.material.side=THREE.DoubleSide;
+				myMsg.position.set(0,0,10);
+				scene.add(myMsg);
+			}
+			
+			function handleonProg(xhr)
+			{
+				console.log("On Text Progress");
+			}
+			
+			function handleonErr(xhr)
+			{
+				console.log("On Text error");
+			}
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
 
     
 			var shape=new THREE.SphereGeometry(35,50,50);
