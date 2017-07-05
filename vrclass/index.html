@@ -119,7 +119,45 @@
 				console.log("On Text error");
 			}
 	    
-	    
+	    var TextShape2=new THREE.BoxGeometry(10,10,0.0001);
+			
+						
+			var textLoader2=new THREE.TextureLoader();
+			var myMsg2;
+			var msgMaterial2;
+			
+			/*
+			var shapeMaterial=new THREE.MeshPhongMaterial({color:0xeee000});
+			myEarth=new THREE.Mesh(shape,shapeMaterial);
+			myEarth.material.side=THREE.DoubleSide;
+				scene.add(myEarth);
+			*/
+			
+			
+			textLoader2.crossOrigin="";
+			textLoader2.load("text.png",handleTextLoad,handleonProg,handleonErr);
+			
+			function handleTextLoad(tex)
+			{
+				console.log("Text Loaded");
+				
+				msgMaterial2=new THREE.MeshBasicMaterial({map:tex,overdraw:0.5,transparent:true});
+				myMsg2=new THREE.Mesh(TextShape2,msgMaterial2);
+				myMsg2.material.side=THREE.DoubleSide;
+				myMsg2.rotation.set(-90,0,0);
+				myMsg2.position.set(0,-10,0);
+				scene.add(myMsg2);
+			}
+			
+			function handleonProg(xhr)
+			{
+				console.log("On Text Progress");
+			}
+			
+			function handleonErr(xhr)
+			{
+				console.log("On Text error");
+			}
 	    
 	    
 	    
