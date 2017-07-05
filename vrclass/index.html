@@ -135,9 +135,9 @@
 			
 			
 			textLoader2.crossOrigin="";
-			textLoader2.load("text2.png",handleTextLoad,handleonProg,handleonErr);
+			textLoader2.load("text2.png",handleTextLoad2,handleonProg2,handleonErr2);
 			
-			function handleTextLoad(tex)
+			function handleTextLoad2(tex)
 			{
 				console.log("Text Loaded");
 				
@@ -149,12 +149,12 @@
 				scene.add(myMsg2);
 			}
 			
-			function handleonProg(xhr)
+			function handleonProg2(xhr)
 			{
 				console.log("On Text Progress");
 			}
 			
-			function handleonErr(xhr)
+			function handleonErr2(xhr)
 			{
 				console.log("On Text error");
 			}
