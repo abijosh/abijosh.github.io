@@ -99,7 +99,7 @@
 			{
 				console.log("Text Loaded");
 				
-				msgMaterial=new THREE.MeshBasicMaterial({map:tex,overdraw:0.5});
+				msgMaterial=new THREE.MeshBasicMaterial({map:tex,overdraw:0.5,transparent:true});
 				myMsg=new THREE.Mesh(TextShape,msgMaterial);
 				myMsg.material.side=THREE.DoubleSide;
 				myMsg.rotation.set(90,0,0);
