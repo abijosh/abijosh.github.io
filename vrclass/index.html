@@ -66,6 +66,8 @@
 
     // Set renderer to the size of the window
     renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	
+	renderer.sortObjects=false;
 
     // Append the renderer to the DOM
     document.body.appendChild( renderer.domElement );
@@ -77,7 +79,7 @@
     var manager = new WebVRManager(renderer, effect);
 	    
 	    
-	    var TextShape=new THREE.BoxGeometry(10,10,0.5);
+	    var TextShape=new THREE.BoxGeometry(10,10,0.0001);
 			
 						
 			var textLoader=new THREE.TextureLoader();
